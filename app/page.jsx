@@ -1,15 +1,15 @@
 /**
  * ============================================================
  * APPLICATION : Portal Sinergi Operasional BUJP-User
- * COMPONENT   : app/page.jsx (Interactive Landing Page & Executive TOR Hub)
+ * COMPONENT   : app/page.jsx
  * CREATED BY  : Bli Nengah
- * VERSION     : v1.0.0
+ * VERSION     : v1.0.1
  * YEAR        : 2026
  * ============================================================
  */
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { 
-  ShieldCheck, 
   Users, 
   Clock, 
   Wallet, 
@@ -26,7 +26,9 @@ import {
   PARTICIPANTS_DATA, 
   SCHEDULE_DATA 
 } from '@/lib/constants';
-import TorCharts from '@/components/TorCharts';
+
+// Load charts only on client-side to prevent SSR build error
+const TorCharts = dynamic(() => import('@/components/TorCharts'), { ssr: false });
 
 export default function HomePage() {
   const formatRupiah = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
