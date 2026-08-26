@@ -1,12 +1,5 @@
-/**
- * ============================================================
- * APPLICATION : Portal Sinergi Operasional BUJP-User
- * COMPONENT   : app/api/tor-data/route.js
- * CREATED BY  : Bli Nengah
- * VERSION     : v1.0.0
- * YEAR        : 2026
- * ============================================================
- */
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 
@@ -18,11 +11,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      data: {
-        costSharing,
-        participants,
-        schedule
-      }
+      data: { costSharing, participants, schedule }
     });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
