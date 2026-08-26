@@ -1,19 +1,11 @@
-/**
- * ============================================================
- * APPLICATION : Portal Sinergi Operasional BUJP-User
- * COMPONENT   : app/api/init/route.js (Neon DB Seeder API)
- * CREATED BY  : Bli Nengah
- * VERSION     : v1.0.0
- * YEAR        : 2026
- * ============================================================
- */
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from 'next/server';
 import { sql } from '@/lib/db';
 import { COST_SHARING_DATA, PARTICIPANTS_DATA, SCHEDULE_DATA } from '@/lib/constants';
 
 export async function GET() {
   try {
-    // Seed Cost Sharing
     for (const item of COST_SHARING_DATA) {
       await sql`
         INSERT INTO cost_sharing (entity_name, percentage, cost_amount)
@@ -22,7 +14,6 @@ export async function GET() {
       `;
     }
 
-    // Seed Participants
     for (const item of PARTICIPANTS_DATA) {
       await sql`
         INSERT INTO participant_breakdown (group_category, institution, participant_count)
@@ -31,7 +22,6 @@ export async function GET() {
       `;
     }
 
-    // Seed Schedule
     let order = 1;
     for (const item of SCHEDULE_DATA) {
       const times = item.time.split(' - ');
